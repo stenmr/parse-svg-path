@@ -1,4 +1,5 @@
 % https://www.w3.org/TR/css-syntax-3/#typedef-number-token
+% https://svgwg.org/svg2-draft/single-page.html#paths-PathDataBNF
 %
 % https://www.metalevel.at/prolog/dcg
 
@@ -85,13 +86,27 @@ coordinate_pair_sequence --> coordinate_pair, comma_wsp, coordinate_pair_sequenc
 
 coordinate_sequence --> coordinate.
 coordinate_sequence --> coordinate, comma_wsp, coordinate_sequence.
-% coordinate_sequence --> coordinate, coordinate_sequence.
+coordinate_sequence --> coordinate, coordinate_sequence.
 
 coordinate_pair --> coordinate, comma_wsp, coordinate.
-% coordinate_pair --> coordinate, coordinate.
+coordinate_pair --> fractional_coordinate, implicit_fractional_coordinate.
+coordinate_pair --> coordinate, signed_coordinate.
 
 coordinate --> number.
 coordinate --> sign, number.
+
+implicit_fractional_coordinate --> implicit_number.
+signed_coordinate --> sign, number.
+fractional_coordinate --> fractional_number.
+
+implicit_number --> implicit_fractional_constant.
+implicit_number --> implicit_fractional_constant, exponent.
+fractional_number --> explicit_fractional_constant.
+fractional_number --> explicit_fractional_constant, exponent.
+
+implicit_fractional_constant --> ".", digits.
+explicit_fractional_constant --> ".", digits.
+explicit_fractional_constant --> digits, ".", digits.
 
 number --> fractional_constant.
 number --> fractional_constant, exponent.
@@ -112,7 +127,6 @@ sign --> ['+'].
 e --> [e].
 e --> ['E'].
 
-
 % Should include more chars
 wsp --> [W], { member(W, [' ', '	', '\n']) }.
 
@@ -120,7 +134,6 @@ wsps --> wsp.
 wsps --> wsp, wsps.
 
 wsps_opt --> [].
-wsps_opt --> wsp.
 wsps_opt --> wsp, wsps.
 
 comma_wsp --> ",".
