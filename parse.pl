@@ -73,16 +73,16 @@ elliptical_arc_argument_sequence --> elliptical_arc_argument, comma_wsp, ellipti
 elliptical_arc_argument --> number, comma_wsp, number, comma_wsp, number, comma_wsp, flag, comma_wsp, flag, comma_wsp, coordinate_pair.
 
 coordinate_pair_double --> coordinate_pair, comma_wsp, coordinate_pair.
-% coordinate_pair_double --> coordinate_pair, coordinate_pair.
+coordinate_pair_double --> coordinate_pair, coordinate_pair.
 
 coordinate_pair_triplet --> coordinate_pair, comma_wsp, coordinate_pair, comma_wsp, coordinate_pair.
-% coordinate_pair_triplet --> coordinate_pair, comma_wsp, coordinate_pair, coordinate_pair.
-% coordinate_pair_triplet --> coordinate_pair, coordinate_pair, comma_wsp, coordinate_pair.
-% coordinate_pair_triplet --> coordinate_pair, coordinate_pair, coordinate_pair.
+coordinate_pair_triplet --> coordinate_pair, comma_wsp, coordinate_pair, coordinate_pair.
+coordinate_pair_triplet --> coordinate_pair, coordinate_pair, comma_wsp, coordinate_pair.
+coordinate_pair_triplet --> coordinate_pair, coordinate_pair, coordinate_pair.
 
 coordinate_pair_sequence --> coordinate_pair.
 coordinate_pair_sequence --> coordinate_pair, comma_wsp, coordinate_pair_sequence.
-% coordinate_pair_sequence --> coordinate_pair, coordinate_pair_sequence.
+coordinate_pair_sequence --> coordinate_pair, coordinate_pair_sequence.
 
 coordinate_sequence --> coordinate.
 coordinate_sequence --> coordinate, comma_wsp, coordinate_sequence.
@@ -141,7 +141,15 @@ wsps --> wsp.
 wsps --> wsp, wsps.
 
 wsps_opt --> [].
+wsps_opt --> wsp.
 wsps_opt --> wsp, wsps.
+
+comma_wsp_opt --> [].
+comma_wsp_opt --> ",".
+comma_wsp_opt --> ",", wsps.
+comma_wsp_opt --> wsps.
+comma_wsp_opt --> wsps, ",".
+comma_wsp_opt --> wsps, ",", wsps.
 
 comma_wsp --> ",".
 comma_wsp --> ",", wsps.
@@ -149,5 +157,4 @@ comma_wsp --> wsps.
 comma_wsp --> wsps, ",".
 comma_wsp --> wsps, ",", wsps.
 
-flag --> ['0'].
-flag --> ['1'].
+flag --> [F], { member(F, ['0', '1']) }.
