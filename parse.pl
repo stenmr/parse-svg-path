@@ -86,7 +86,12 @@ coordinate_pair_sequence --> coordinate_pair, comma_wsp, coordinate_pair_sequenc
 
 coordinate_sequence --> coordinate.
 coordinate_sequence --> coordinate, comma_wsp, coordinate_sequence.
-coordinate_sequence --> coordinate, coordinate_sequence.
+coordinate_sequence --> fractional_coordinate, coordinate_sequence_r.
+
+coordinate_sequence_r --> coordinate.
+coordinate_sequence_r --> coordinate, comma_wsp, coordinate_sequence_r.
+coordinate_sequence_r --> implicit_fractional_coordinate, coordinate_sequence_r.
+coordinate_sequence_r --> signed_coordinate, coordinate_sequence.
 
 coordinate_pair --> coordinate, comma_wsp, coordinate.
 coordinate_pair --> fractional_coordinate, implicit_fractional_coordinate.
@@ -96,8 +101,10 @@ coordinate --> number.
 coordinate --> sign, number.
 
 implicit_fractional_coordinate --> implicit_number.
+implicit_fractional_coordinate --> sign, implicit_number.
 signed_coordinate --> sign, number.
 fractional_coordinate --> fractional_number.
+fractional_coordinate --> sign, fractional_number.
 
 implicit_number --> implicit_fractional_constant.
 implicit_number --> implicit_fractional_constant, exponent.
@@ -111,9 +118,9 @@ explicit_fractional_constant --> digits, ".", digits.
 number --> fractional_constant.
 number --> fractional_constant, exponent.
 
-fractional_constant --> digits.
+fractional_constant --> digits, ".", !, digits.
 fractional_constant --> ".", digits.
-fractional_constant --> digits, ".", digits.
+fractional_constant --> digits.
 
 exponent --> e, digits.
 exponent --> e, sign, digits.
