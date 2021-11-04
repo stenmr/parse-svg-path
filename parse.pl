@@ -70,7 +70,7 @@ elliptical_arc_argument_sequence --> elliptical_arc_argument.
 elliptical_arc_argument_sequence --> elliptical_arc_argument, comma_wsp, elliptical_arc_argument_sequence.
 % elliptical_arc_argument_sequence --> elliptical_arc_argument, elliptical_arc_argument_sequence.
 
-elliptical_arc_argument --> number, comma_wsp, number, comma_wsp, number, comma_wsp, flag, comma_wsp, flag, comma_wsp, coordinate_pair.
+elliptical_arc_argument --> number, comma_wsp_opt, number, comma_wsp_opt, number, comma_wsp, flag, comma_wsp, flag, comma_wsp_opt, coordinate_pair.
 
 coordinate_pair_double --> coordinate_pair, comma_wsp, coordinate_pair.
 coordinate_pair_double --> coordinate_pair, coordinate_pair.
